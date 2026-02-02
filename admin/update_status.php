@@ -5,46 +5,95 @@ use PHPMailer\PHPMailer\Exception;
 require '../assets/PHPMailer/src/Exception.php';
 require '../assets/PHPMailer/src/PHPMailer.php';
 require '../assets/PHPMailer/src/SMTP.php';
-include "config/koneksi.php"; // koneksi database
+include "../config/koneksi.php";
 
-if(isset($_POST['id'], $_POST['status'])) {
-    $id = (int)$_POST['id'];
-    $status = $_POST['status'];
+// Ambil data POST
+$id = $_POST['id'];
+$status = $_POST['status'];
 
-    // Ambil info user dari DB
-    $query = mysqli_query($conn, "SELECT email, nama FROM users WHERE id=$id");
-    $user = mysqli_fetch_assoc($query);
+// Update status tiket di database
+mysqli_query($conn, "UPDATE tickets SET status='$status', is_read_admin=1 WHERE id='$id'");
 
-    // Update status di database
-    mysqli_query($conn, "UPDATE your_table SET status='$status' WHERE id=$id");
+// Ambil info tiket dan user dari DB
+$query = mysqli_query($conn, "SELECT u.email, u.nama, t.judul, t.kategori, t.deskripsi, t.created_at
+                              FROM tickets t
+                              JOIN users u ON t.user_id = u.id
+                              WHERE t.id='$id'");
+$user = mysqli_fetch_assoc($query);
 
-    // ---- Kirim email dengan PHPMailer ----
-    $mail = new PHPMailer(true);
-    try {
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'your_email@gmail.com';
-        $mail->Password   = 'your_app_password';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
+// Format tanggal update
+$tanggal_update = date('d F Y H:i');
 
-        $mail->setFrom('your_email@gmail.com', 'Admin');
-        $mail->addAddress($user['email'], $user['nama']);
+// ---- Kirim email notifikasi ----
+$mail = new PHPMailer(true);
+try {
+    // Pengaturan server SMTP
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'myogaapriadi43@gmail.com';   // Email pengirim
+    $mail->Password   = 'jdks npwh llib jnch';        // App Password
+    $mail->SMTPSecure = 'tls';
+    $mail->Port       = 587;
 
-        $mail->isHTML(true);
-        $mail->Subject = 'Update Status Tiket Anda';
-        $mail->Body    = "Halo <b>".$user['nama']."</b>,<br><br>Status tiket Anda telah diubah menjadi: <b>$status</b>.<br><br>Terima kasih.";
+    // Penerima
+    $mail->setFrom('myogaapriadi43@gmail.com', 'Admin IT Poltekpar Lombok');
+    $mail->addAddress($user['email'], $user['nama']);
 
-        $mail->send();
-        $email_status = 'success';
-    } catch (Exception $e) {
-        $email_status = 'fail';
-        // Optional: simpan log error $mail->ErrorInfo
-    }
+    // Konten email
+    $mail->isHTML(true);
+    $mail->Subject = "Pemberitahuan Pembaruan Status Tiket Helpdesk #$id";
 
-    // Redirect kembali ke tiket.php dengan status update & email
-    header("Location: tiket.php?update=success&email=$email_status");
-    exit;
+    $mail->Body = "
+    <p>Yth. <b>".$user['nama']."</b>,</p>
+
+    <p>Kami ingin memberitahukan bahwa tiket helpdesk Anda telah diperbarui. Berikut rincian tiket Anda:</p>
+
+    <table style='border-collapse: collapse; width: 100%;'>
+        <tr>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>No </b></td>
+            <td style='padding: 8px; border: 1px solid #ddd;'>$id</td>
+        </tr>
+        <tr>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>Permasalahan</b></td>
+            <td style='padding: 8px; border: 1px solid #ddd;'>".$user['judul']."</td>
+        </tr>
+        <tr>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>Kategori</b></td>
+            <td style='padding: 8px; border: 1px solid #ddd;'>".$user['kategori']."</td>
+        </tr>
+        <tr>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>Deskripsi</b></td>
+            <td style='padding: 8px; border: 1px solid #ddd;'>".$user['deskripsi']."</td>
+        </tr>
+        <tr>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>Status</b></td>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>$status</b></td>
+        </tr>
+        <tr>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>Tanggal di ajukan</b></td>
+            <td style='padding: 8px; border: 1px solid #ddd;'>".date('d F Y H:i', strtotime($user['created_at']))."</td>
+        </tr>
+        <tr>
+            <td style='padding: 8px; border: 1px solid #ddd;'><b>Tanggal Update Progress</b></td>
+            <td style='padding: 8px; border: 1px solid #ddd;'>$tanggal_update</td>
+        </tr>
+    </table>
+
+    <p>Apabila Anda memiliki pertanyaan lebih lanjut atau membutuhkan bantuan tambahan, silakan balas email ini atau menghubungi tim helpdesk kami.</p>
+
+    <p>Terima kasih atas perhatian dan kerjasama Anda.</p>
+
+    <p>Hormat kami,<br><b>Tim Helpdesk</b></p>
+    ";
+
+    $mail->send();
+    $email_status = 'success';
+} catch (Exception $e) {
+    $email_status = 'fail';
 }
+
+// Redirect ke halaman tiket dengan status email
+header("Location: tiket.php?email=$email_status");
+exit;
 ?>
