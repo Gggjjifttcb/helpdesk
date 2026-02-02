@@ -32,7 +32,13 @@ $tiket_terbaru = mysqli_query($conn, "
 
         <ul class="menu">
             <li><a href="dashboard.php" class="active">Dashboard</a></li>
-            <li><a href="tiket.php">Kelola Helpdesk</a></li>
+            <li>
+    <a href="tiket.php">
+        Kelola Helpdesk
+        <span id="notif" class="notif-badge" style="display:none">0</span>
+    </a>
+</li>
+
         </ul>
 
         <a href="../auth/logout.php" class="btn-logout">Logout</a>
@@ -91,6 +97,24 @@ $tiket_terbaru = mysqli_query($conn, "
 
     </main>
 </div>
+<script>
+function loadNotif(){
+    fetch('notifikasi_count.php')
+    .then(res => res.text())
+    .then(total => {
+        let badge = document.getElementById('notif');
+        if (total > 0) {
+            badge.style.display = 'inline-block';
+            badge.innerText = total;
+        } else {
+            badge.style.display = 'none';
+        }
+    });
+}
+
+loadNotif();
+setInterval(loadNotif, 5000); // tiap 5 detik
+</script>
 
 </body>
 </html>

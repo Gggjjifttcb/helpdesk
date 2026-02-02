@@ -1,10 +1,26 @@
 <?php
 //session_start();
 include "../config/koneksi.php";
+mysqli_query($conn, "
+UPDATE tickets 
+SET is_read_admin = 1 
+WHERE is_read_admin = 0
+");
 
 if (!isset($_SESSION['login']) || $_SESSION['role'] != 'admin') {
     header("Location: ../auth/login.php");
     exit;
+}
+
+if(isset($_GET['update']) && $_GET['update'] == 'success') {
+    echo "<div class='alert alert-success'>Status tiket berhasil diperbarui!</div>";
+    if(isset($_GET['email'])) {
+        if($_GET['email'] == 'success') {
+            echo "<div class='alert alert-info'>Email notifikasi telah dikirim.</div>";
+        } else {
+            echo "<div class='alert alert-warning'>Gagal mengirim email notifikasi.</div>";
+        }
+    }
 }
 
 $data = mysqli_query($conn, "
