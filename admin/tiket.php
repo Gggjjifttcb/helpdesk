@@ -31,7 +31,7 @@ $data = mysqli_query($conn, "
 
         <ul class="menu">
             <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="tiket.php" class="active">Kelola Tiket</a></li>
+            <li><a href="tiket.php" class="active">Kelola Helpdesk</a></li>
         </ul>
 
         <a href="../auth/logout.php" class="btn-logout">Logout</a>
@@ -41,7 +41,7 @@ $data = mysqli_query($conn, "
     <main class="content">
 
         <div class="content-header">
-            <h3>Kelola Tiket</h3>
+            <h3>Kelola Helpdesk</h3>
         </div>
 
         <div class="card-table">
@@ -50,7 +50,7 @@ $data = mysqli_query($conn, "
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Judul</th>
+                        <th>Permasalahan</th>
                         <th>Kategori</th>
                         <th>Deskripsi</th>
                         <th>Status</th>
@@ -67,7 +67,7 @@ $data = mysqli_query($conn, "
                         <td>
                             <?= htmlspecialchars($d['deskripsi']) ?>
                         </td>
-                        <td><br>
+                        <td>
                             <span class="badge 
                                 <?= $d['status']=='Open'?'badge-open':
                                    ($d['status']=='Proses'?'badge-proses':'badge-selesai') ?>">

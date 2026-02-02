@@ -29,8 +29,8 @@ $selesai = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM tickets WHERE use
     <aside class="sidebar">
         <h2>Helpdesk</h2>
         <a href="dashboard.php" class="active">Dashboard</a>
-        <a href="buat_tiket.php">Buat Tiket</a>
-        <a href="tiket_saya.php">Tiket Saya</a>
+        <a href="buat_tiket.php">Buat Helpdesk</a>
+        <a href="tiket_saya.php">Helpdesk Saya</a>
         <a href="../auth/logout.php" class="logout">Logout</a>
     </aside>
 
@@ -58,7 +58,7 @@ $selesai = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM tickets WHERE use
         </div>
 
         <div class="info-box">
-            <p>Gunakan menu di samping untuk membuat tiket baru atau memantau status laporan Anda.</p>
+            <p>Gunakan menu di samping untuk membuat Helpdesk baru atau memantau status laporan Anda.</p>
         </div>
     </main>
 

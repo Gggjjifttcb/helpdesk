@@ -32,7 +32,7 @@ $tiket_terbaru = mysqli_query($conn, "
 
         <ul class="menu">
             <li><a href="dashboard.php" class="active">Dashboard</a></li>
-            <li><a href="tiket.php">Kelola Tiket</a></li>
+            <li><a href="tiket.php">Kelola Helpdesk</a></li>
         </ul>
 
         <a href="../auth/logout.php" class="btn-logout">Logout</a>
@@ -47,7 +47,7 @@ $tiket_terbaru = mysqli_query($conn, "
 
         <div class="card-table">
             <div class="card-header">
-                <h4>Tiket Terbaru</h4>
+                <h4>Helpdesk Terbaru</h4>
                 <a href="tiket.php" class="btn-primary btn-sm">Lihat Semua</a>
             </div>
 
@@ -55,7 +55,7 @@ $tiket_terbaru = mysqli_query($conn, "
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Judul</th>
+                        <th>Permasalahan</th>
                         <th>Kategori</th>
                         <th>Deskripsi</th>
                         <th>Status</th>
@@ -82,7 +82,7 @@ $tiket_terbaru = mysqli_query($conn, "
                     <?php endwhile ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6" class="text-center">Belum ada tiket</td>
+                        <td colspan="6" class="text-center">Belum ada helpdesk terbaru</td>
                     </tr>
                 <?php endif ?>
                 </tbody>

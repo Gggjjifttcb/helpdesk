@@ -37,15 +37,15 @@ if (isset($_POST['submit'])) {
     <aside class="sidebar">
         <h2>Helpdesk</h2>
         <a href="dashboard.php">Dashboard</a>
-        <a href="buat_tiket.php" class="active">Buat Tiket</a>
-        <a href="tiket_saya.php">Tiket Saya</a>
+        <a href="buat_tiket.php" class="active">Buat Helpdesk</a>
+        <a href="tiket_saya.php">Helpdesk Saya</a>
         <a href="../auth/logout.php" class="logout">Logout</a>
     </aside>
 
     <!-- Content -->
     <main class="content">
 
-        <h3>Buat Tiket Baru</h3>
+        <h3>Buat Helpdesk Baru</h3>
 
         <div class="form-card">
             <form method="POST">
