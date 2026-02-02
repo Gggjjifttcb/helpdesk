@@ -1,0 +1,145 @@
+/* ================================
+   ADMIN LTE STYLE – HELP DESK
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+    color: #333;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(0,0,0,.08);
+}
+
+/* TITLE */
+.container h4 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #343a40;
+}
+
+/* TABLE */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.table-modern {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.table-modern thead {
+    background: #343a40;
+    color: #fff;
+}
+
+.table-modern th,
+.table-modern td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.table-modern th {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.table-modern tbody tr {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.table-modern tbody tr:hover {
+    background: #f1f3f5;
+}
+
+/* BADGE STATUS */
+.badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.badge-open {
+    background: #dc3545;
+}
+
+.badge-proses {
+    background: #ffc107;
+    color: #212529;
+}
+
+.badge-selesai {
+    background: #28a745;
+}
+
+/* FORM INLINE */
+.form-inline {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* SELECT */
+.select-status {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    font-size: 13px;
+}
+
+/* BUTTON */
+.btn-update {
+    padding: 6px 14px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.btn-update:hover {
+    background: #0056b3;
+}
+
+/* BACK BUTTON */
+.btn-back {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+}
+
+.btn-back:hover {
+    text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .form-inline {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-update {
+        width: 100%;
+    }
+}

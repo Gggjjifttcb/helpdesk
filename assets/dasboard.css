@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+}
+
+/* ===== LAYOUT ===== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 240px;
+    background: #0f172a;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.menu {
+    list-style: none;
+    flex: 1;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu a {
+    display: block;
+    padding: 10px 14px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+.btn-logout {
+    background: #dc2626;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* ===== CONTENT ===== */
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+.content-header {
+    margin-bottom: 20px;
+}
+
+/* ===== CARD TABLE ===== */
+.card-table {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* ===== TABLE ===== */
+.table-modern {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-modern thead {
+    background: #1f2937;
+    color: #fff;
+}
+
+.table-modern th,
+.table-modern td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
+}
+
+.table-modern tbody tr:hover {
+    background: #f1f5f9;
+}
+
+/* ===== BADGE ===== */
+.badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.badge-open {
+    background: #ef4444;
+}
+
+.badge-proses {
+    background: #f59e0b;
+}
+
+.badge-selesai {
+    background: #16a34a;
+}
+
+/* ===== BUTTON ===== */
+.btn-primary {
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-sm {
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+/* ===== UTIL ===== */
+.text-center {
+    text-align: center;
+}
+
+.text-truncate {
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.form-inline {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.select-status {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 13px;
+}
