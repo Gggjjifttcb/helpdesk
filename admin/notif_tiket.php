@@ -11,6 +11,5 @@ $q = mysqli_query($conn, "
     FROM tickets 
     WHERE is_read_admin = 0
 ");
-
 $d = mysqli_fetch_assoc($q);
 echo $d['total'];

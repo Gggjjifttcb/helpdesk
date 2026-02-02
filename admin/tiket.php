@@ -48,9 +48,8 @@ $data = mysqli_query($conn, "
         <ul class="menu">
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="tiket.php" class="active">Kelola Helpdesk</a></li>
+            
         </ul>
-
-        <a href="../auth/logout.php" class="btn-logout">Logout</a>
     </aside>
 
     <!-- CONTENT -->

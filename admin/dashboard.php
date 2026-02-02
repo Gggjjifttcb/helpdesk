@@ -12,7 +12,7 @@ $tiket_terbaru = mysqli_query($conn, "
     FROM tickets 
     JOIN users ON tickets.user_id = users.id
     ORDER BY tickets.created_at DESC
-    LIMIT 10
+    LIMIT 5
 ");
 ?>
 <!DOCTYPE html>
@@ -37,11 +37,9 @@ $tiket_terbaru = mysqli_query($conn, "
         Kelola Helpdesk
         <span id="notif" class="notif-badge" style="display:none">0</span>
     </a>
-</li>
-
+            </li>
         </ul>
-
-        <a href="../auth/logout.php" class="btn-logout">Logout</a>
+        <a href="../auth/logout.php" class="btn-logout">Logout</a></li>
     </aside>
 
     <!-- CONTENT -->

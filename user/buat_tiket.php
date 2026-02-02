@@ -12,15 +12,24 @@ if (isset($_POST['submit'])) {
     $kategori  = mysqli_real_escape_string($conn, $_POST['kategori']);
     $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
     $user_id   = $_SESSION['user_id'];
+    $nama_user = $_SESSION['nama'];
 
-    mysqli_query($conn, "INSERT INTO tickets 
+    $insert = mysqli_query($conn, "INSERT INTO tickets 
         (user_id, judul, kategori, deskripsi, status, created_at)
         VALUES ('$user_id', '$judul', '$kategori', '$deskripsi', 'Open', NOW())
     ");
 
-    header("Location: tiket_saya.php");
-    exit;
+    if ($insert) {
+        include "kirim_notifikasi.php"; // include helper
+        kirimNotifikasiAdmin($judul, $kategori, $deskripsi, $nama_user); // kirim email ke admin
+
+        header("Location: tiket_saya.php");
+        exit;
+    } else {
+        echo "<script>alert('Gagal membuat tiket, silakan coba lagi!');</script>";
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -45,7 +54,7 @@ if (isset($_POST['submit'])) {
     <!-- Content -->
     <main class="content">
 
-        <h3>Buat Helpdesk Baru</h3>
+        <h3>Buat Helpdesk</h3>
 
         <div class="form-card">
             <form method="POST">
