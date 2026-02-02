@@ -6,7 +6,7 @@ require '../assets/PHPMailer/src/Exception.php';
 require '../assets/PHPMailer/src/PHPMailer.php';
 require '../assets/PHPMailer/src/SMTP.php';
 
-function kirimNotifikasiAdmin($judul, $kategori, $deskripsi, $nama_user) {
+function kirimNotifikasiAdmin($judul, $kategori, $deskripsi, $nama_user, $tanggal) {
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
@@ -23,19 +23,19 @@ function kirimNotifikasiAdmin($judul, $kategori, $deskripsi, $nama_user) {
         $mail->isHTML(true);
         $mail->Subject = "Tiket Baru Masuk: $judul";
 
-        $mail->Body = "
-        <p>Yth. <b>Admin Helpdesk</b>,</p>
-        <p>User <b>$nama_user</b> telah membuat tiket baru di sistem Helpdesk:</p>
+       $mail->Body = "
+        <p>Yth. <b>Admin IT Poltekpar Lombok</b>,</p>
+        <p>User <b>$nama_user</b> telah membuat Helpdesk baru di  Helpdesk System:</p>
         <table style='border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;'>
             <tr style='background-color: #f2f2f2;'>
                 <th style='padding:10px; border:1px solid #ddd;'>Informasi</th>
                 <th style='padding:10px; border:1px solid #ddd;'>Detail</th>
             </tr>
-            <tr><td style='padding:10px; border:1px solid #ddd;'>Judul Tiket</td><td style='padding:10px; border:1px solid #ddd;'>$judul</td></tr>
+            <tr><td style='padding:10px; border:1px solid #ddd;'>Permasalahan</td><td style='padding:10px; border:1px solid #ddd;'>$judul</td></tr>
             <tr><td style='padding:10px; border:1px solid #ddd;'>Kategori</td><td style='padding:10px; border:1px solid #ddd;'>$kategori</td></tr>
-            <tr><td style='padding:10px; border:1px solid #ddd;'>Deskripsi Masalah</td><td style='padding:10px; border:1px solid #ddd;'>$deskripsi</td></tr>
+            <tr><td style='padding:10px; border:1px solid #ddd;'>Deskripsi Permasalahan</td><td style='padding:10px; border:1px solid #ddd;'>$deskripsi</td></tr>
             <tr><td style='padding:10px; border:1px solid #ddd;'>User</td><td style='padding:10px; border:1px solid #ddd;'>$nama_user</td></tr>
-            <tr><td style='padding:10px; border:1px solid #ddd;'>Tanggal</td><td style='padding:10px; border:1px solid #ddd;'>".date('d F Y H:i')."</td></tr>
+            <tr><td style='padding:10px; border:1px solid #ddd;'>Tanggal Pengajuan</td><td style='padding:10px; border:1px solid #ddd;'>$tanggal</td></tr>
         </table>
         <p>Silakan login ke <a href='https://yourdomain.com/admin/tiket.php'>sistem Helpdesk</a> untuk menindaklanjuti tiket ini.</p>
         <p>Hormat kami,<br><b>Helpdesk System</b></p>

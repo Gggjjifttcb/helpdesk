@@ -22,7 +22,7 @@ $query = mysqli_query($conn, "SELECT u.email, u.nama, t.judul, t.kategori, t.des
 $user = mysqli_fetch_assoc($query);
 
 // Format tanggal update
-$tanggal_update = date('d F Y H:i');
+$tanggal_update = date('d F Y');
 
 // ---- Kirim email notifikasi ----
 $mail = new PHPMailer(true);
@@ -47,7 +47,7 @@ try {
     $mail->Body = "
     <p>Yth. <b>".$user['nama']."</b>,</p>
 
-    <p>Kami ingin memberitahukan bahwa tiket helpdesk Anda telah diperbarui. Berikut rincian tiket Anda:</p>
+    <p>Kami ingin memberitahukan bahwa Progress helpdesk Anda telah diperbarui. Berikut rincian Helpdesk Anda:</p>
 
     <table style='border-collapse: collapse; width: 100%;'>
         <tr>
@@ -73,10 +73,6 @@ try {
         <tr>
             <td style='padding: 8px; border: 1px solid #ddd;'><b>Tanggal di ajukan</b></td>
             <td style='padding: 8px; border: 1px solid #ddd;'>".date('d F Y H:i', strtotime($user['created_at']))."</td>
-        </tr>
-        <tr>
-            <td style='padding: 8px; border: 1px solid #ddd;'><b>Tanggal Update Progress</b></td>
-            <td style='padding: 8px; border: 1px solid #ddd;'>$tanggal_update</td>
         </tr>
     </table>
 

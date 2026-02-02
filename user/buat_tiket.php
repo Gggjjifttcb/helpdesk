@@ -14,14 +14,22 @@ if (isset($_POST['submit'])) {
     $user_id   = $_SESSION['user_id'];
     $nama_user = $_SESSION['nama'];
 
+    // Simpan tiket
     $insert = mysqli_query($conn, "INSERT INTO tickets 
         (user_id, judul, kategori, deskripsi, status, created_at)
         VALUES ('$user_id', '$judul', '$kategori', '$deskripsi', 'Open', NOW())
     ");
 
     if ($insert) {
+        // Ambil data tiket yang baru saja dibuat
+        $ticket_id = mysqli_insert_id($conn);
+        $tiket = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tickets WHERE id='$ticket_id'"));
+        $tanggal = date('d F Y H:i', strtotime($tiket['created_at'])); // format dari DB
+
         include "kirim_notifikasi.php"; // include helper
-        kirimNotifikasiAdmin($judul, $kategori, $deskripsi, $nama_user); // kirim email ke admin
+
+        // Kirim email ke admin dengan tanggal dari DB
+        kirimNotifikasiAdmin($judul, $kategori, $deskripsi, $nama_user, $tanggal);
 
         header("Location: tiket_saya.php");
         exit;
@@ -60,7 +68,7 @@ if (isset($_POST['submit'])) {
             <form method="POST">
 
                 <div class="form-group">
-                    <label>Judul Tiket</label>
+                    <label>Permasalahan</label>
                     <input type="text" name="judul" placeholder="Contoh: Laptop tidak menyala" required>
                 </div>
 
@@ -81,7 +89,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="form-action">
                     <button type="submit" name="submit" class="btn-primary">
-                        Kirim Tiket
+                        Kirim Helpdesk
                     </button>
                     <a href="dashboard.php" class="btn-secondary">
                         Batal
